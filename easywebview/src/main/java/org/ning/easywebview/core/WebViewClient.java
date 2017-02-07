@@ -25,7 +25,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
     public static class Listener extends android.webkit.WebViewClient{
 
     }
-    public WebViewClient(Listener webViewClient) {
+    public WebViewClient(android.webkit.WebViewClient webViewClient) {
         this.webViewClient = webViewClient;
     }
 
@@ -35,7 +35,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
         this.listener = listener;
     }
 
-    public android.webkit.WebViewClient getListener() {
+    public Listener getListener() {
         return listener;
     }
 

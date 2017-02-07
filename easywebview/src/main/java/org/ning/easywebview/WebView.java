@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
@@ -85,6 +86,16 @@ public class WebView extends android.webkit.WebView{
     }
 
     private org.ning.easywebview.core.WebViewClient webViewClient;
+    private org.ning.easywebview.core.WebChromeClient webChromeClient;
+    @Override
+    public void setWebChromeClient(WebChromeClient client) {
+        super.setWebChromeClient(webChromeClient=new org.ning.easywebview.core.WebChromeClient(client));
+    }
+
+    public org.ning.easywebview.core.WebChromeClient getWebChromeClient() {
+        return webChromeClient;
+    }
+
     @Override
     public final void setWebViewClient(WebViewClient client) {
         super.setWebViewClient(webViewClient=new org.ning.easywebview.core.WebViewClient(client));
