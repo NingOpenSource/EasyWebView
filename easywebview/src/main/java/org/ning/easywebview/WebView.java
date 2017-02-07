@@ -79,7 +79,33 @@ public class WebView extends android.webkit.WebView{
             webSettings.setAppCacheEnabled(true);
         }
     }
+    private OnScrollListener mOnScrollListener;
 
+    @Override
+    protected void onScrollChanged(final int l, final int t, final int oldl,
+                                   final int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+
+        if (mOnScrollListener != null) {
+            mOnScrollListener.onScroll(l - oldl, t - oldt);
+        }
+    }
+
+    public OnScrollListener getOnScrollListener() {
+        return mOnScrollListener;
+    }
+
+    @Override
+    public void setOnScrollChangeListener(OnScrollChangeListener l) {
+        super.setOnScrollChangeListener(l);
+    }
+
+    /**
+     * Impliment in the activity/fragment/view that you want to listen to the webview
+     */
+    public static interface OnScrollListener {
+        public void onScroll(int dx, int dy);
+    }
     @Override
     public WebSettings getSettings() {
         return new org.ning.easywebview.core.WebSettings(super.getSettings());
