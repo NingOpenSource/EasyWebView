@@ -79,20 +79,24 @@ public class WebView extends android.webkit.WebView{
             webSettings.setAppCacheEnabled(true);
         }
     }
-    private OnScrollListener mOnScrollListener;
+    private OnScrollListener onScrollListener;
 
     @Override
     protected void onScrollChanged(final int l, final int t, final int oldl,
                                    final int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
 
-        if (mOnScrollListener != null) {
-            mOnScrollListener.onScroll(l - oldl, t - oldt);
+        if (onScrollListener != null) {
+            onScrollListener.onScroll(l - oldl, t - oldt);
         }
     }
 
     public OnScrollListener getOnScrollListener() {
-        return mOnScrollListener;
+        return onScrollListener;
+    }
+
+    public void setOnScrollListener(OnScrollListener onScrollListener) {
+        this.onScrollListener = onScrollListener;
     }
 
     @Override
