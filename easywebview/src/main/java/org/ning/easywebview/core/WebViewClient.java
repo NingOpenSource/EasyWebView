@@ -23,13 +23,13 @@ public class WebViewClient extends android.webkit.WebViewClient {
         this.webViewClient = webViewClient;
     }
 
-    private WebViewClient listener;
+    private android.webkit.WebViewClient listener;
 
-    public void setListener(WebViewClient listener) {
+    public void setListener(android.webkit.WebViewClient listener) {
         this.listener = listener;
     }
 
-    public WebViewClient getListener() {
+    public android.webkit.WebViewClient getListener() {
         return listener;
     }
 
