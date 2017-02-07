@@ -52,7 +52,13 @@ public class WebView extends android.webkit.WebView{
     }
 
     private void initDefaultConfig(){
-        setWebViewClient(new org.ning.easywebview.core.WebViewClient());
+        setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+        });
         {
             WebSettings webSettings=getSettings();
             webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
@@ -78,8 +84,13 @@ public class WebView extends android.webkit.WebView{
         return new org.ning.easywebview.core.WebSettings(super.getSettings());
     }
 
+    private org.ning.easywebview.core.WebViewClient webViewClient;
     @Override
-    public void setWebViewClient(WebViewClient client) {
-        super.setWebViewClient(client);
+    public final void setWebViewClient(WebViewClient client) {
+        super.setWebViewClient(webViewClient=new org.ning.easywebview.core.WebViewClient(client));
+    }
+
+    public org.ning.easywebview.core.WebViewClient getWebViewClient() {
+        return webViewClient;
     }
 }

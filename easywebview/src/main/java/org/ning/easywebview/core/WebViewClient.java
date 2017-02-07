@@ -3,7 +3,9 @@ package org.ning.easywebview.core;
 
 import android.graphics.Bitmap;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.webkit.ClientCertRequest;
 import android.webkit.SslErrorHandler;
@@ -15,6 +17,22 @@ import android.webkit.WebView;
  * Created by yanni on 2017/2/4.
  */
 public class WebViewClient extends android.webkit.WebViewClient {
+    private android.webkit.WebViewClient webViewClient;
+
+    public WebViewClient(android.webkit.WebViewClient webViewClient) {
+        this.webViewClient = webViewClient;
+    }
+
+    private WebViewClient listener;
+
+    public void setListener(WebViewClient listener) {
+        this.listener = listener;
+    }
+
+    public WebViewClient getListener() {
+        return listener;
+    }
+
     /**
      * 在点击请求的是链接是才会调用，重写此方法返回true表明点击网页里面的链接还是在当前的webview里跳转，
      * 不跳到浏览器那边。这个函数我们可以做很多操作，比如我们读取到某些特殊的URL，于是就可以不打开地址，
@@ -26,8 +44,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        view.loadUrl(url);
-        return false;
+        if (listener != null) listener.shouldOverrideUrlLoading(view, url);
+        return webViewClient.shouldOverrideUrlLoading(view, url);
     }
 
     /**
@@ -39,7 +57,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
-        super.doUpdateVisitedHistory(view, url, isReload);
+        if (listener != null) listener.doUpdateVisitedHistory(view, url, isReload);
+        webViewClient.doUpdateVisitedHistory(view, url, isReload);
     }
 
     /**
@@ -51,7 +70,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onFormResubmission(WebView view, Message dontResend, Message resend) {
-        super.onFormResubmission(view, dontResend, resend);
+        if (listener != null) listener.onFormResubmission(view, dontResend, resend);
+        webViewClient.onFormResubmission(view, dontResend, resend);
     }
 
     /**
@@ -62,7 +82,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onLoadResource(WebView view, String url) {
-        super.onLoadResource(view, url);
+        if (listener != null) listener.onLoadResource(view, url);
+        webViewClient.onLoadResource(view, url);
     }
 
     /**
@@ -74,7 +95,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        super.onPageStarted(view, url, favicon);
+        if (listener != null) listener.onPageStarted(view, url, favicon);
+        webViewClient.onPageStarted(view, url, favicon);
     }
 
     /**
@@ -85,7 +107,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onPageFinished(WebView view, String url) {
-        super.onPageFinished(view, url);
+        if (listener != null) listener.onPageFinished(view, url);
+        webViewClient.onPageFinished(view, url);
     }
 
     /**
@@ -95,9 +118,11 @@ public class WebViewClient extends android.webkit.WebViewClient {
      * @param request
      * @param error
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-        super.onReceivedError(view, request, error);
+        if (listener != null) listener.onReceivedError(view, request, error);
+        webViewClient.onReceivedError(view, request, error);
     }
 
     /**
@@ -106,9 +131,11 @@ public class WebViewClient extends android.webkit.WebViewClient {
      * @param view
      * @param request
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceivedClientCertRequest(WebView view, ClientCertRequest request) {
-        super.onReceivedClientCertRequest(view, request);
+        if (listener != null) listener.onReceivedClientCertRequest(view, request);
+        webViewClient.onReceivedClientCertRequest(view, request);
     }
 
     /**
@@ -120,7 +147,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-        super.onReceivedSslError(view, handler, error);
+        if (listener != null) listener.onReceivedSslError(view, handler, error);
+        webViewClient.onReceivedSslError(view, handler, error);
     }
 
     /**
@@ -132,7 +160,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onScaleChanged(WebView view, float oldScale, float newScale) {
-        super.onScaleChanged(view, oldScale, newScale);
+        if (listener != null) listener.onScaleChanged(view, oldScale, newScale);
+        webViewClient.onScaleChanged(view, oldScale, newScale);
     }
 
     /**
@@ -143,7 +172,8 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-        super.onUnhandledKeyEvent(view, event);
+        if (listener != null) listener.onUnhandledKeyEvent(view, event);
+        webViewClient.onUnhandledKeyEvent(view, event);
     }
 
     /**
@@ -155,6 +185,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
-        return super.shouldOverrideKeyEvent(view, event);
+        if (listener != null) listener.shouldOverrideKeyEvent(view, event);
+        return webViewClient.shouldOverrideKeyEvent(view, event);
     }
 }
