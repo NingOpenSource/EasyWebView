@@ -19,13 +19,19 @@ import android.webkit.WebView;
 public class WebViewClient extends android.webkit.WebViewClient {
     private android.webkit.WebViewClient webViewClient;
 
-    public WebViewClient(android.webkit.WebViewClient webViewClient) {
+    /**
+     *
+     */
+    public static class Listener extends android.webkit.WebViewClient{
+
+    }
+    public WebViewClient(Listener webViewClient) {
         this.webViewClient = webViewClient;
     }
 
-    private android.webkit.WebViewClient listener;
+    private Listener listener;
 
-    public void setListener(android.webkit.WebViewClient listener) {
+    public void setListener(Listener listener) {
         this.listener = listener;
     }
 
