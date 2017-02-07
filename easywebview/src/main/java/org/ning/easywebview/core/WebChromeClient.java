@@ -49,35 +49,35 @@ public class WebChromeClient extends android.webkit.WebChromeClient {
     public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
         if (listener != null) listener.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
         return
-        webChromeClient.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+                webChromeClient.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
     }
 
     @Override
     public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
         if (listener != null) listener.onJsAlert(view, url, message, result);
         return
-        webChromeClient.onJsAlert(view, url, message, result);
+                webChromeClient.onJsAlert(view, url, message, result);
     }
 
     @Override
     public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
         if (listener != null) listener.onJsBeforeUnload(view, url, message, result);
         return
-        webChromeClient.onJsBeforeUnload(view, url, message, result);
+                webChromeClient.onJsBeforeUnload(view, url, message, result);
     }
 
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
         if (listener != null) listener.onJsConfirm(view, url, message, result);
         return
-        webChromeClient.onJsConfirm(view, url, message, result);
+                webChromeClient.onJsConfirm(view, url, message, result);
     }
 
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
         if (listener != null) listener.onJsPrompt(view, url, message, defaultValue, result);
         return
-        webChromeClient.onJsPrompt(view, url, message, defaultValue, result);
+                webChromeClient.onJsPrompt(view, url, message, defaultValue, result);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -85,7 +85,7 @@ public class WebChromeClient extends android.webkit.WebChromeClient {
     public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
         if (listener != null) listener.onShowFileChooser(webView, filePathCallback, fileChooserParams);
         return
-        webChromeClient.onShowFileChooser(webView, filePathCallback, fileChooserParams);
+                webChromeClient.onShowFileChooser(webView, filePathCallback, fileChooserParams);
     }
 
     @Override
@@ -165,7 +165,7 @@ public class WebChromeClient extends android.webkit.WebChromeClient {
     @Override
     public boolean onJsTimeout() {if (listener != null) listener.onJsTimeout();
         return
-        webChromeClient.onJsTimeout();
+                webChromeClient.onJsTimeout();
     }
 
     @Override
