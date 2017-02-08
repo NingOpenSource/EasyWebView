@@ -41,7 +41,7 @@ public class WebView extends android.webkit.WebView{
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && canGoBack()) {
+        if (!isSinglePageMode&&(keyCode == KeyEvent.KEYCODE_BACK) && canGoBack()) {
             goBack();
             return true;
         }
@@ -50,6 +50,19 @@ public class WebView extends android.webkit.WebView{
 
     private void init(){
         initDefaultConfig();
+    }
+
+    /**
+     * 是否為單頁面模式
+     */
+    private boolean isSinglePageMode=true;
+
+    public boolean isSinglePageMode() {
+        return isSinglePageMode;
+    }
+
+    public void setSinglePageMode(boolean singlePageMode) {
+        isSinglePageMode = singlePageMode;
     }
 
     private void initDefaultConfig(){
