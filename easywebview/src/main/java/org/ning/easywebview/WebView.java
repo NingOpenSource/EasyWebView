@@ -55,7 +55,7 @@ public class WebView extends android.webkit.WebView{
     /**
      * 是否為單頁面模式
      */
-    private boolean isSinglePageMode=true;
+    private boolean isSinglePageMode=false;
 
     /**
      * 是否為單頁面模式

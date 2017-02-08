@@ -23,11 +23,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void init(){
+//        webView.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
+//                view.loadUrl(url);
+//                return false;
+//            }
+//        });
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
-                view.loadUrl(url);
-                return false;
+                return true;
             }
         });
         Dexter.withActivity(this).withPermission(Manifest.permission.INTERNET).withListener(new EmptyPermissionListener(){
@@ -40,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPermissionGranted(PermissionGrantedResponse response) {
                 super.onPermissionGranted(response);
-                webView.loadUrl("http://varietyshop.oschina.io/example/projects/videos/");
+//                webView.loadUrl("http://varietyshop.oschina.io/example/projects/videos/");
+                webView.loadUrl("http://192.168.0.220/appapi/home/index.html");
             }
         }).check();
     }
