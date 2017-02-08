@@ -13,7 +13,7 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by yanni on 2017/2/4.
@@ -31,9 +31,9 @@ public class WebViewClient extends android.webkit.WebViewClient {
         this.webViewClient = webViewClient;
     }
 
-    private ArrayList<Listener> listeners=new ArrayList<>();
+    private HashMap<String,Listener> listeners=new HashMap<>();
 
-    public ArrayList<Listener> getListeners() {
+    public HashMap<String,Listener> getListeners() {
         return listeners;
     }
 
@@ -48,7 +48,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        for(Listener listener:listeners) listener.shouldOverrideUrlLoading(view, url);
+        for(Listener listener:listeners.values()) listener.shouldOverrideUrlLoading(view, url);
         return webViewClient.shouldOverrideUrlLoading(view, url);
     }
 
@@ -61,7 +61,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
-        for(Listener listener:listeners) listener.doUpdateVisitedHistory(view, url, isReload);
+        for(Listener listener:listeners.values()) listener.doUpdateVisitedHistory(view, url, isReload);
         webViewClient.doUpdateVisitedHistory(view, url, isReload);
     }
 
@@ -74,7 +74,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onFormResubmission(WebView view, Message dontResend, Message resend) {
-        for(Listener listener:listeners) listener.onFormResubmission(view, dontResend, resend);
+        for(Listener listener:listeners.values()) listener.onFormResubmission(view, dontResend, resend);
         webViewClient.onFormResubmission(view, dontResend, resend);
     }
 
@@ -86,7 +86,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onLoadResource(WebView view, String url) {
-        for(Listener listener:listeners) listener.onLoadResource(view, url);
+        for(Listener listener:listeners.values()) listener.onLoadResource(view, url);
         webViewClient.onLoadResource(view, url);
     }
 
@@ -99,7 +99,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        for(Listener listener:listeners) listener.onPageStarted(view, url, favicon);
+        for(Listener listener:listeners.values()) listener.onPageStarted(view, url, favicon);
         webViewClient.onPageStarted(view, url, favicon);
     }
 
@@ -111,7 +111,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onPageFinished(WebView view, String url) {
-        for(Listener listener:listeners) listener.onPageFinished(view, url);
+        for(Listener listener:listeners.values()) listener.onPageFinished(view, url);
         webViewClient.onPageFinished(view, url);
     }
 
@@ -125,7 +125,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-        for(Listener listener:listeners) listener.onReceivedError(view, request, error);
+        for(Listener listener:listeners.values()) listener.onReceivedError(view, request, error);
         webViewClient.onReceivedError(view, request, error);
     }
 
@@ -138,7 +138,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceivedClientCertRequest(WebView view, ClientCertRequest request) {
-        for(Listener listener:listeners) listener.onReceivedClientCertRequest(view, request);
+        for(Listener listener:listeners.values()) listener.onReceivedClientCertRequest(view, request);
         webViewClient.onReceivedClientCertRequest(view, request);
     }
 
@@ -151,7 +151,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-        for(Listener listener:listeners) listener.onReceivedSslError(view, handler, error);
+        for(Listener listener:listeners.values()) listener.onReceivedSslError(view, handler, error);
         webViewClient.onReceivedSslError(view, handler, error);
     }
 
@@ -164,7 +164,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onScaleChanged(WebView view, float oldScale, float newScale) {
-        for(Listener listener:listeners) listener.onScaleChanged(view, oldScale, newScale);
+        for(Listener listener:listeners.values()) listener.onScaleChanged(view, oldScale, newScale);
         webViewClient.onScaleChanged(view, oldScale, newScale);
     }
 
@@ -176,7 +176,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
-        for(Listener listener:listeners) listener.onUnhandledKeyEvent(view, event);
+        for(Listener listener:listeners.values()) listener.onUnhandledKeyEvent(view, event);
         webViewClient.onUnhandledKeyEvent(view, event);
     }
 
@@ -189,7 +189,7 @@ public class WebViewClient extends android.webkit.WebViewClient {
      */
     @Override
     public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
-        for(Listener listener:listeners) listener.shouldOverrideKeyEvent(view, event);
+        for(Listener listener:listeners.values()) listener.shouldOverrideKeyEvent(view, event);
         return webViewClient.shouldOverrideKeyEvent(view, event);
     }
 }

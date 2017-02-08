@@ -48,7 +48,7 @@ public class WebView extends android.webkit.WebView{
         return super.onKeyDown(keyCode, event);
     }
 
-    private void init(){
+    private final void init(){
         initDefaultConfig();
     }
 
@@ -57,22 +57,22 @@ public class WebView extends android.webkit.WebView{
      */
     private boolean isSinglePageMode=true;
 
-    public boolean isSinglePageMode() {
+    /**
+     * 是否為單頁面模式
+     */
+    public final boolean isSinglePageMode() {
         return isSinglePageMode;
     }
 
-    public void setSinglePageMode(boolean singlePageMode) {
+    /**
+     * 是否為單頁面模式
+     */
+    public final void setSinglePageMode(boolean singlePageMode) {
         isSinglePageMode = singlePageMode;
     }
 
-    private void initDefaultConfig(){
-        setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
-                view.loadUrl(url);
-                return false;
-            }
-        });
+
+    private final void initDefaultConfig(){
         {
             WebSettings webSettings=getSettings();
             webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
@@ -104,16 +104,16 @@ public class WebView extends android.webkit.WebView{
         }
     }
 
-    public OnScrollListener getOnScrollListener() {
+    public final OnScrollListener getOnScrollListener() {
         return onScrollListener;
     }
 
-    public void setOnScrollListener(OnScrollListener onScrollListener) {
+    public final void setOnScrollListener(OnScrollListener onScrollListener) {
         this.onScrollListener = onScrollListener;
     }
 
     @Override
-    public void setOnScrollChangeListener(OnScrollChangeListener l) {
+    public final void setOnScrollChangeListener(OnScrollChangeListener l) {
         super.setOnScrollChangeListener(l);
     }
 
@@ -124,18 +124,18 @@ public class WebView extends android.webkit.WebView{
         public void onScroll(int dx, int dy);
     }
     @Override
-    public WebSettings getSettings() {
+    public final WebSettings getSettings() {
         return new org.ning.easywebview.core.WebSettings(super.getSettings());
     }
 
     private org.ning.easywebview.core.WebViewClient webViewClient;
     private org.ning.easywebview.core.WebChromeClient webChromeClient;
     @Override
-    public void setWebChromeClient(WebChromeClient client) {
+    public final void setWebChromeClient(WebChromeClient client) {
         super.setWebChromeClient(webChromeClient=new org.ning.easywebview.core.WebChromeClient(client));
     }
 
-    public org.ning.easywebview.core.WebChromeClient getWebChromeClient() {
+    public final org.ning.easywebview.core.WebChromeClient getWebChromeClient() {
         return webChromeClient;
     }
 
@@ -144,7 +144,7 @@ public class WebView extends android.webkit.WebView{
         super.setWebViewClient(webViewClient=new org.ning.easywebview.core.WebViewClient(client));
     }
 
-    public org.ning.easywebview.core.WebViewClient getWebViewClient() {
+    public final org.ning.easywebview.core.WebViewClient getWebViewClient() {
         return webViewClient;
     }
 }

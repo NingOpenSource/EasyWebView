@@ -3,6 +3,7 @@ package org.ning.easywebview.example;
 import android.Manifest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebViewClient;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -22,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void init(){
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+        });
         Dexter.withActivity(this).withPermission(Manifest.permission.INTERNET).withListener(new EmptyPermissionListener(){
             @Override
             public void onPermissionDenied(PermissionDeniedResponse response) {
